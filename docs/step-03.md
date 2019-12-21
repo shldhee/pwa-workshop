@@ -9,13 +9,13 @@
 * 파일내용:
 
 ```yaml
-name: <WORKFLOW_NAME>
-on: <EVENT>
+name: <WORKFLOW_NAME> - 액션이 어떤식으로 코드 푸쉬 했을때 어떻게 정의한게 workflow
+on: <EVENT> - on : 이벤트 깃헙에 무슨짓을 했을때 워크플로우가 실행되느냐(푸쉬했을때!, 내가 풀리퀘 날릴때!, 코멘트!, 돌아가게한다 등등)
 jobs:
-  <JOB_NAME>:
-    runs-on: <RUNNER>
+  <JOB_NAME> - 액션 지정:
+    runs-on: <RUNNER> - 이 잡이 돌아가는 운영체제 환경, 현재 깃헙이 제공해주는 윈도우, 맥 , 리눅스 셋중에 하나 선택 또는 내가 맘대로 운영체제 정의 셀포스 러너 만들 수 있다.
     steps:
-    - name: <ACTION_NAME>
+    - name: <ACTION_NAME> - 여러가지 스텝 정의, 하나하나가 액션, 여러가지 있다, 리포지토리 체크아웃, 애저에 로그인, npm빌드를 돌려라 등등 액션 정의, 다섯가지 개념
       uses: <ACTION>
 ```
 

@@ -71,10 +71,10 @@ az group create \
   "contentVersion": "1.0.0.0",
   "parameters": {
     "storageAccountNames": {
-      "value": "[COMMA_DELIMITED_STORAGE_ACCOUNT_NAME]"
+      "value": "dokiworkshopdev,dokiworkshopprod"
     },
     "keyVaultName": {
-      "value": "[KEY_VAULT_NAME]"
+      "value": "dokiworkshop"
     }
   }
 }
