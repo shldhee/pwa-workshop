@@ -10,11 +10,6 @@ jobs:
     - name: Checkout the repo
       uses: actions/checkout@v1
 
-    - name: Login to Azure
-      uses: Azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
     - name: Install npm packages
       shell: bash
       run: |
@@ -30,9 +25,31 @@ jobs:
       run: |
         npm run test
 
-    - name: Publish app
-      uses: Azure/cli@v1.0.0
+    - name: Upload app
+      uses: actions/upload-artifact@v1
       with:
-        azcliversion: latest
-        inlineScript: |
-          az storage blob upload-batch -s build -d \$web --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }}
+        name: app
+        path: build
+
+    deploy_to_dev:
+      needs: build_and_publish
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Download app
+        uses: actions/download-artifact@v1
+        with:
+          name: app
+          path: build
+
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Publish app
+        uses: Azure/cli@v1.0.0
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az storage blob upload-batch -s build -d \$web --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }}        
