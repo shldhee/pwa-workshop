@@ -32,7 +32,7 @@ git push origin master
 
 ```yaml
   deploy_to_dev:
-    needs: build_and_publish
+    needs: build_and_publish - 의존성 순서대로
     runs-on: ubuntu-latest
 
     steps:
